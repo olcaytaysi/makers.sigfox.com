@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<!--
+	<head>
+		<title>Modules</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+		<meta name = "viewport" content = "initial-scale = 1, user-scalable = no">
+		<style>
+			modules{}
+            SoC{}
+            transceivers{}
+		</style>
+	</head>
+-->
+	<body>
+ 
+<!--
+		<div class="solutionsmodules" >
+            <h4 class="text-center">Modules</h4>
+			<canvas id="modules" height="450" width="450"></canvas>
+            </div>
+        <div class="solutionssoc">  
+        <h4 class="text-center">SoCs</h4>
+            <canvas id="SoC" height="450" width="450"></canvas>
+            </div>  
+        <div class="solutionstransceivers">  
+        <h4 class="text-center">transceivers</h4>
+            <canvas id="transceivers" height="450" width="450"></canvas>
+		</div> 
+
+        
+
+	<script>
+	var modulesChartData = {
+		labels: ["Price", "Integration cost", "Size", "Development time", "Easy to use"],
+		datasets: [
+			{
+				label: "Modules",
+				fillColor: "rgba(151,187,205,0.2)",
+				strokeColor: "rgba(151,187,205,1)",
+				pointColor: "rgba(151,187,205,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: [50,65,70,80,50]
+			}
+		]
+	};
+    	
+    var SoCChartData = {
+		labels: ["Price", "Integration cost", "Size", "Development time", "Easy to use"],
+		datasets: [
+			{
+				label: "SoCs",
+				fillColor: "rgba(64, 84, 77, 0.85)",
+				strokeColor: "rgba(155,187,205,1)",
+				pointColor: "rgba(151,187,205,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "rgba(220,220,220,1)",
+				data: [50,65,70,80,50]
+			}
+		]
+	};
+        
+    var transceiversChartData = {
+		labels: ["Price", "Integration cost", "Size", "Development time", "Easy to use"],
+		datasets: [
+			{
+				label: "SoCs",
+				fillColor: "rgba(64, 84, 77, 0.85)",
+				strokeColor: "rgba(155,187,205,1)",
+				pointColor: "rgba(151,187,205,1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
+				pointHighlightStroke: "#fff",
+				data: [50,65,70,80,50]
+			}
+		]
+	};   
+        
+	window.onload = function(){
+		window.myRadar = new Chart(document.getElementById("modules").getContext("2d")).Radar(modulesChartData, {
+			responsive: true, pointLabelFontColor : "#FFF",
+		});
+        window.myRadar2 = new Chart(document.getElementById("SoC").getContext("2d")).Radar(SoCChartData, {
+			responsive: true, pointLabelFontColor : "#FFF",
+		});
+        window.myRadar3 = new Chart(document.getElementById("transceivers").getContext("2d")).Radar(transceiversChartData, {
+			responsive: true, pointLabelFontColor : "#FFF",  scaleLineColor: "FFF", 
+		});
+        
+	}
+	</script>
+-->
+        
+        
+{% assign types = site.data.hardware.solutions %}
+<section id="hardware-solutions">
+
+    {% for type in types %}
+    <section id="{{type.name | slugify}}">
+      <h2>{{type.name}}</h2>
+      {%if type.info %}
+        <h5><i>{{type/info}}</i></h5>
+      {% endif %}
+      <div class="row">
+        {% assign idx = 0 %}
+        {% assign partners = type.partners | sort:"name" %}
+        {% for partner in partners %}
+          {% assign solutions = partner.solutions | sort:"name" %}
+          {% for solution in solutions %}
+
+            {% assign idx = idx | plus: 1 %}
+            {% assign lgcycle = idx | modulo: 3 %}  
+            {% assign smcycle = idx | modulo: 2 %}
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+              <div class="hardware-solution">
+                <h3>{{partner.name}}</h3>
+                <h4>{{solution.name}}</h4>
+                <p>{{solution.desc}}</p>
+                {% if solution.more %}
+                  <p class="more">More informations on <a target="_blank" href="{{solution.more.link}}">{{solution.more.text}}</a></p>
+                {% endif %}
+                {% if solution.img %}
+                  <div class="hw-img">
+                    <img src="{{site.url}}/img/hw/{{solution.img}}" />
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            {% if smcycle == 0 %}
+              <div class="clearfix visible-sm-block visible-md-block"></div>
+            {% endif%}
+            {% if lgcycle == 0 %}
+              <div class="clearfix visible-lg-block "></div>
+            {% endif%}
+          {% endfor %}
+        {% endfor %}
+      </div >
+    </section>
+  {% endfor %}
+</section>
+	</body>
+</html>

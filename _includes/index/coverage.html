@@ -2,12 +2,13 @@
 {% assign rollout = site.data.coverage.countries | where: "status", "rollout" | sort:"name"%}
 {% assign cities =  site.data.coverage.cities | sort:"name"%}
 <section id="coverage">
-    <h1>Coverage</h1>
+    <h2>Where does it work ? </h2>
     <p>
       <i>SIGFOX coverage, as of {{site.data.coverage.update | date:"%B %Y"}}</i><br />
       You can check the precise coverage <a href="http://sigfox.com/en/#!/connected-world/sigfox-network-operator" target="_blank">on sigfox.com</a>, with a zoomable map.<br />
-      <a href="#contact">Contact us</a> for details & questions about current coverage, and stay tuned for future announcements ! <br />
+      <a href="#contact">Contact us</a> for details & questions about current coverage, and stay tuned for future announcements ! <br /><br />
     </p>
+<!--
     <div class="row">
       <div class="col-sm-4">
         <h3>Nationwide coverage</h3>
@@ -34,4 +35,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
