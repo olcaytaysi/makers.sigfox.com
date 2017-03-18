@@ -151,3 +151,19 @@
   skills:
     - IoT Projects architecture
     - embedded systems
+
+- name: Taysi
+  firstname: Olcay
+  country: NL
+  city: Amsterdam
+  img: olcay.jpg
+  links:
+    - type: linkedin
+      url: https://www.linkedin.com/in/olcaytaysi
+  languages:
+      - English
+      - Turkish
+      - Spanish
+  skills:
+    - IoT Projects Architecture
+    - Software Programing
